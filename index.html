@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Screen & Window Dimensions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .info {
+            margin-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Screen & Window Dimension Info</h1>
+    <div id="output"></div>
+
+    <script>
+        function displayInfo() {
+            const output = document.getElementById('output');
+            const info = [];
+
+            // Screen properties
+            info.push(`<div class="info"><strong>screen.width:</strong> ${screen.width}px</div>`);
+            info.push(`<div class="info"><strong>screen.height:</strong> ${screen.height}px</div>`);
+            info.push(`<div class="info"><strong>screen.availWidth:</strong> ${screen.availWidth}px</div>`);
+            info.push(`<div class="info"><strong>screen.availHeight:</strong> ${screen.availHeight}px</div>`);
+
+            // Window properties
+            info.push(`<div class="info"><strong>window.innerWidth:</strong> ${window.innerWidth}px</div>`);
+            info.push(`<div class="info"><strong>window.innerHeight:</strong> ${window.innerHeight}px</div>`);
+            info.push(`<div class="info"><strong>window.outerWidth:</strong> ${window.outerWidth}px</div>`);
+            info.push(`<div class="info"><strong>window.outerHeight:</strong> ${window.outerHeight}px</div>`);
+
+            // Document properties
+            info.push(`<div class="info"><strong>document.documentElement.clientWidth:</strong> ${document.documentElement.clientWidth}px</div>`);
+            info.push(`<div class="info"><strong>document.documentElement.clientHeight:</strong> ${document.documentElement.clientHeight}px</div>`);
+
+            // Pixel ratio
+            info.push(`<div class="info"><strong>window.devicePixelRatio:</strong> ${window.devicePixelRatio}</div>`);
+
+            // Calculated CSS viewport
+            const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+            const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+            info.push(`<div class="info"><strong>Calculated viewport width:</strong> ${viewportWidth}px</div>`);
+            info.push(`<div class="info"><strong>Calculated viewport height:</strong> ${viewportHeight}px</div>`);
+
+            output.innerHTML = info.join('');
+        }
+
+        displayInfo();
+
+        // Update on resize
+        window.addEventListener('resize', displayInfo);
+    </script>
+</body>
+</html>
