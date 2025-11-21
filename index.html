@@ -25,48 +25,54 @@
     <h1>Screen & Window Dimension Info</h1>
     <div id="output"></div>
 
-    <script>
-        function displayInfo() {
-            const output = document.getElementById('output');
-            const info = [];
+<script>
+    function openIOSApp() {
+        console.log("shreyas openIOSApp");
+        const appStoreUrl = "https://apps.apple.com/app/apple-store/id541164041";
+        const appScheme = "itms-apps://itunes.apple.com/app/id541164041";
 
-            // User Agent info
-            info.push(`<div class="info"><strong>navigator.userAgent:</strong> <code>${navigator.userAgent}</code></div>`);
-            info.push(`<div class="info"><strong>navigator.platform:</strong> <code>${navigator.platform}</code></div>`);
-            info.push(`<div class="info"><strong>navigator.vendor:</strong> <code>${navigator.vendor}</code></div>`);
+        window.location.href = appScheme;
 
-            info.push("<hr>");
+        setTimeout(function () {
+            window.location.href = appStoreUrl;
+            console.log("shreyas opening IOSApp");
+        }, 1500);
+    }
 
-            // Screen properties
-            info.push(`<div class="info"><strong>screen.width:</strong> ${screen.width}px</div>`);
-            info.push(`<div class="info"><strong>screen.height:</strong> ${screen.height}px</div>`);
-            info.push(`<div class="info"><strong>screen.availWidth:</strong> ${screen.availWidth}px</div>`);
-            info.push(`<div class="info"><strong>screen.availHeight:</strong> ${screen.availHeight}px</div>`);
+    function displayInfo() {
+        const output = document.getElementById('output');
+        const info = [];
 
-            // Window properties
-            info.push(`<div class="info"><strong>window.innerWidth:</strong> ${window.innerWidth}px</div>`);
-            info.push(`<div class="info"><strong>window.innerHeight:</strong> ${window.innerHeight}px</div>`);
-            info.push(`<div class="info"><strong>window.outerWidth:</strong> ${window.outerWidth}px</div>`);
-            info.push(`<div class="info"><strong>window.outerHeight:</strong> ${window.outerHeight}px</div>`);
+        info.push(`<div class="info"><strong>navigator.userAgent:</strong> <code>${navigator.userAgent}</code></div>`);
+        info.push(`<div class="info"><strong>navigator.platform:</strong> <code>${navigator.platform}</code></div>`);
+        info.push(`<div class="info"><strong>navigator.vendor:</strong> <code>${navigator.vendor}</code></div>`);
+        info.push("<hr>");
+        info.push(`<div class="info"><strong>screen.width:</strong> ${screen.width}px</div>`);
+        info.push(`<div class="info"><strong>screen.height:</strong> ${screen.height}px</div>`);
+        info.push(`<div class="info"><strong>screen.availWidth:</strong> ${screen.availWidth}px</div>`);
+        info.push(`<div class="info"><strong>screen.availHeight:</strong> ${screen.availHeight}px</div>`);
+        info.push(`<div class="info"><strong>window.innerWidth:</strong> ${window.innerWidth}px</div>`);
+        info.push(`<div class="info"><strong>window.innerHeight:</strong> ${window.innerHeight}px</div>`);
+        info.push(`<div class="info"><strong>window.outerWidth:</strong> ${window.outerWidth}px</div>`);
+        info.push(`<div class="info"><strong>window.outerHeight:</strong> ${window.outerHeight}px</div>`);
+        info.push(`<div class="info"><strong>document.documentElement.clientWidth:</strong> ${document.documentElement.clientWidth}px</div>`);
+        info.push(`<div class="info"><strong>document.documentElement.clientHeight:</strong> ${document.documentElement.clientHeight}px</div>`);
+        info.push(`<div class="info"><strong>window.devicePixelRatio:</strong> ${window.devicePixelRatio}</div>`);
 
-            // Document properties
-            info.push(`<div class="info"><strong>document.documentElement.clientWidth:</strong> ${document.documentElement.clientWidth}px</div>`);
-            info.push(`<div class="info"><strong>document.documentElement.clientHeight:</strong> ${document.documentElement.clientHeight}px</div>`);
+        const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+        info.push(`<div class="info"><strong>Calculated viewport width:</strong> ${viewportWidth}px</div>`);
+        info.push(`<div class="info"><strong>Calculated viewport height:</strong> ${viewportHeight}px</div>`);
 
-            // Pixel ratio
-            info.push(`<div class="info"><strong>window.devicePixelRatio:</strong> ${window.devicePixelRatio}</div>`);
+        output.innerHTML = info.join('');
+    }
 
-            // Calculated CSS viewport size
-            const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-            const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-            info.push(`<div class="info"><strong>Calculated viewport width:</strong> ${viewportWidth}px</div>`);
-            info.push(`<div class="info"><strong>Calculated viewport height:</strong> ${viewportHeight}px</div>`);
-
-            output.innerHTML = info.join('');
-        }
-
+    window.onload = function () {
+        openIOSApp();
         displayInfo();
-        window.addEventListener('resize', displayInfo);
-    </script>
+    };
+
+    window.addEventListener('resize', displayInfo);
+</script>
 </body>
 </html>
