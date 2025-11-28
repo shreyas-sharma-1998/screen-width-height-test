@@ -40,6 +40,13 @@
     }
 
     function displayInfo() {
+
+        const ratio = window.devicePixelRatio || 1;
+        const metrics = {
+            screenWidth : Math.round(window.screen.width / ratio),
+            screenHeight: Math.round(window.screen.height / ratio),
+            pixelRatio: ratio
+        };
         const output = document.getElementById('output');
         const info = [];
 
@@ -47,6 +54,7 @@
         info.push(`<div class="info"><strong>navigator.platform:</strong> <code>${navigator.platform}</code></div>`);
         info.push(`<div class="info"><strong>navigator.vendor:</strong> <code>${navigator.vendor}</code></div>`);
         info.push("<hr>");
+        
         info.push(`<div class="info"><strong>screen.width:</strong> ${screen.width}px</div>`);
         info.push(`<div class="info"><strong>screen.height:</strong> ${screen.height}px</div>`);
         info.push(`<div class="info"><strong>screen.availWidth:</strong> ${screen.availWidth}px</div>`);
@@ -63,6 +71,12 @@
         const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
         info.push(`<div class="info"><strong>Calculated viewport width:</strong> ${viewportWidth}px</div>`);
         info.push(`<div class="info"><strong>Calculated viewport height:</strong> ${viewportHeight}px</div>`);
+
+        info.push("<hr>");
+        info.push(`<h3>📐 Calculated Metrics (in screen points)</h3>`);
+        info.push(`<div class="info"><strong>pixelRatio:</strong> ${metrics.pixelRatio}</div>`);
+        info.push(`<div class="info"><strong>screenWidth (points):</strong> ${metrics.screenWidth}</div>`);
+        info.push(`<div class="info"><strong>screenHeight (points):</strong> ${metrics.screenHeight}</div>`);
 
         output.innerHTML = info.join('');
     }
